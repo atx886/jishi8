@@ -107,7 +107,10 @@ def rw(phone):
     r = requests.post(url=url4, headers=header)
     li = r.text
     lis = re.findall('id\":(\d+\.?\d),\"title', li)
-
+    if len(lis) < 4:
+        r = requests.post(url=url4, headers=header)
+        li = r.text
+        lis = re.findall('id\":(\d+\.?\d),\"title', li)
     # 点赞
     m = 0
     for l in lis:
