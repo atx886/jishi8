@@ -246,10 +246,10 @@ for i in tc:
     a3 += i
 print(a3)
 
-print("各任务失败序号")
-print("任务一")
-ww(ta)
-print("任务二")
-ww(tb)
-print("任务三")
-ww(tc)
+# print("各任务失败序号")
+# print("任务一")
+# ww(ta)
+# print("任务二")
+# ww(tb)
+# print("任务三")
+# ww(tc)
