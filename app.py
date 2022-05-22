@@ -107,22 +107,25 @@ def rw(phone):
     r = requests.post(url=url4, headers=header)
     li = r.text
     lis = re.findall('id\":(\d+\.?\d),\"title', li)
+    v = 0
     if len(lis) < 4:
         r = requests.post(url=url4, headers=header)
         li = r.text
         lis = re.findall('id\":(\d+\.?\d),\"title', li)
+        v += 
+        if v > 4:
+            print("获取不到")
+            break
     # 点赞
     m = 0
     for l in lis:
-        time.sleep(0.7)
+        time.sleep(1)
         url3 = 'https://v1.kykykb.cn/forum/topic/agree?topic_id=' + l
         r = requests.post(url=url3, headers=header)
         res = r.content.decode('utf-8')
         res = json.loads(res)
         print(res)
-        m += 1
-        if m >= 5:
-            break
+
     url6 = 'https://v1.kykykb.cn/task/receive?partner_id=xiaomi&platform_code=xiaomi&id=3&version=1.2.2&platform=android&timestamp=' + str(
         int(round(time.time() * 1000)))
     r = requests.get(url=url6, headers=header)
@@ -133,23 +136,6 @@ def rw(phone):
     # 发表
     url5 = 'https://v1.kykykb.cn/forum/topic/edit?partner_id=xiaomi&platform_code=xiaomi&category_id=687&resources=%5B%7B%22type%22%3A%22text%22%2C%22content%22%3A%222%22%7D%5D&title=1&version=1.2.2&platform=android&timestamp=1653127568442'
     # url5 = 'https://v1.kykykb.cn/forum/topic/edit?partner_id=xiaomi&platform_code=xiaomi&category_id=687&resources=%5B%7B%22type%22%3A%22text%22%2C%22content%22%3A%22%F0%9F%98%84%22%7D%5D&title=%E5%BF%AB%E4%B9%90&version=1.2.2&platform=android&timestamp=1653127472119'
-    tk = 'NvZ0hWVXpQBe/t/pNoqIimu+tMNgweb3'
-    h = {
-        'X-User-Token': tk
-    }
-    r = requests.get('https://v2.jinrishici.com/sentence', headers=h)
-    # res = r.content.decode('utf-8')
-    # res = json.loads(res)
-    res = r.text
-    title = re.findall('title\":\"(.+?)\"', res)
-    content = re.findall('content\":\"(.+?)\"', res)
-    # print(res)
-    print(title[0])
-    print(content[0])
-    text = f'[{{"type":"text","content":"{content[0][1]}"}}]&title={title[0][1]}'
-    # print(text)
-    qt = urllib.parse.quote(text)
-    print(qt)
     # url5 = 'https://v1.kykykb.cn/forum/topic/edit?partner_id=xiaomi&platform_code=xiaomi&category_id=687&resources=' + qt + '&version=1.2.2&platform=android&timestamp=' + str(
     #     int(round(time.time() * 1000)))
     # print(url5)
