@@ -115,7 +115,6 @@ def rw(phone):
         v += 1
         if v > 4:
             print("获取不到")
-            break
     # 点赞
     m = 0
     for l in lis:
