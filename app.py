@@ -79,6 +79,7 @@ def gettk(phone):
     x = r.text
     # print(x)
     s = re.findall('token\":\"(.+?)\"', x)
+    # print(s)
     # print(s[0])
     return s[0]
 
@@ -89,7 +90,10 @@ def qd(header):
     r = requests.get(url=url2, headers=header)
     res = r.content.decode('utf-8')
     res = json.loads(res)
-    print(res)
+    # print(res)
+    res = str(res)
+    s = re.findall('code\': (\d.+?\d),', res)
+    return s
 
 
 def dz(header):
@@ -117,7 +121,10 @@ def dz(header):
     r = requests.get(url=url6, headers=header)
     res = r.content.decode('utf-8')
     res = json.loads(res)
-    print(res)
+    # print(res)
+    res = str(res)
+    s = re.findall('code\': (\d.+?\d),', res)
+    return s
 
 
 def gettask(header):
@@ -129,7 +136,7 @@ def gettask(header):
     res = r.content.decode('utf-8')
     res = json.loads(res)
     # print(r.content)
-    # print(res)
+    print(res)
 
     a = str(res)
     s = re.findall('state_desc\': \'(.+?)\'', a)
@@ -164,27 +171,37 @@ def fb(header):
     url7 = 'https://v1.kykykb.cn/task/receive?partner_id=xiaomi&platform_code=xiaomi&id=7&version=1.2.2&platform=android&timestamp=' + str(
         int(round(time.time() * 1000)))
     r = requests.get(url=url7, headers=header)
-    # res = r.content.decode('utf-8')
-    # res = json.loads(res)
+    res = r.content.decode('utf-8')
+    res = json.loads(res)
     # print(res)
+    res = str(res)
+    s = re.findall('code\': (\d.+?\d),', res)
+    return s
 
 
 def lg(header, t):
     x = 0
+    y = t
     t = max_a - t
     a = gettask(header)
     if a[0] != "完成":
-        qd(header)
+        if qd(header) == '1103':
+            header = setheader(gettk(writeexcle(y)))
+            qd(header)
     else:
         x += 1
         ta[t] = 1
     if a[1] != "完成":
-        dz(header)
+        if dz(header) == '1103':
+            header = setheader(gettk(writeexcle(y)))
+            dz(header)
     else:
         x += 1
         tb[t] = 1
     if a[2] != "完成":
-        fb(header)
+        if fb(header) == '1103':
+            header = setheader(gettk(writeexcle(y)))
+            fb(header)
     else:
         x += 1
         tc[t] = 1
