@@ -11,7 +11,7 @@ ta = []
 tb = []
 tc = []
 
-file = '5.xlsx'
+file = '2.xlsx'
 max_a = load_workbook(file).active.max_row
 for a in range(0, max_a + 1):
     ta.append(0)
@@ -78,7 +78,7 @@ def getuid(phone):
 
     data = {
         "mobile": str(phone),
-        "password": "123456",
+        "password": "147369",
         "type": "zl_jiudou"
     }
     p = random.randint(1, 8)
@@ -184,7 +184,7 @@ def gettask(header):
     res = r.content.decode('utf-8')
     res = json.loads(res)
     # print(r.content)
-    print(res)
+   # print(res)
 
     a = str(res)
     s = re.findall('state_desc\': \'(.+?)\'', a)
@@ -223,7 +223,7 @@ def fb(header):
     res = r.content.decode('utf-8')
     res = json.loads(res)
     # print(res)
-    # res = str(res)
+    res = str(res)
     s = re.findall('code\': (\d.+?\d),', res)
     return s
 
@@ -290,6 +290,7 @@ def ww(k):
 
 errs = []
 errph = []
+jh = max_a  -260
 t = 0
 jt = 0
 while t < max_a:
