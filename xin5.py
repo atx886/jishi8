@@ -37,6 +37,7 @@ def writeexcle(t):
 
     if max_row > 0:
         a = sheet[row_max].value
+        a = str(a)[0:11]
         print(a)
         return a
     else:
