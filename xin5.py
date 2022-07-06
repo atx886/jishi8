@@ -11,7 +11,7 @@ ta = []
 tb = []
 tc = []
 
-file = '6.xlsx'
+file = '8.xlsx'
 max_a = load_workbook(file).active.max_row
 for a in range(0, max_a + 1):
     ta.append(0)
